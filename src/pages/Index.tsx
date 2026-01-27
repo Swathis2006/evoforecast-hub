@@ -9,6 +9,9 @@ import { ResultsPanel } from "@/components/ResultsPanel";
 import { OptimizationPanel } from "@/components/OptimizationPanel";
 import { PredictionPanel } from "@/components/PredictionPanel";
 import { ArchitecturePanel } from "@/components/ArchitecturePanel";
+import { StatsSection } from "@/components/StatsSection";
+import { FeaturesSection } from "@/components/FeaturesSection";
+import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { cn } from "@/lib/utils";
 
 type Step = 1 | 2 | 3 | 4 | 5;
@@ -100,8 +103,17 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <StatsSection />
+
+      {/* Features Section */}
+      <FeaturesSection />
+
+      {/* How It Works Section */}
+      <HowItWorksSection />
+
       {/* Main Content */}
-      <main className="container mx-auto px-4 pb-20">
+      <main className="container mx-auto px-4 pb-20 pt-12">
         <div className="max-w-4xl mx-auto">
           {/* Step 1: Upload */}
           {currentStep === 1 && (
