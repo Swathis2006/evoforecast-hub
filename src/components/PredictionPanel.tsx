@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ArrowRight, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingUp, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { exportPredictionToCSV } from "@/lib/export";
 
 interface PredictionPanelProps {
   columns: string[];
@@ -91,6 +91,15 @@ export function PredictionPanel({
           <p className="text-xs text-muted-foreground mt-2">
             Based on optimized MLP model
           </p>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-4"
+            onClick={() => exportPredictionToCSV(inputs, prediction)}
+          >
+            <Download className="w-4 h-4 mr-1" />
+            Export Prediction
+          </Button>
         </div>
       )}
 
