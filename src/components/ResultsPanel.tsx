@@ -1,6 +1,8 @@
 import { TrainingResults } from "./TrainingPanel";
-import { TrendingUp, TrendingDown, Activity } from "lucide-react";
+import { TrendingUp, TrendingDown, Activity, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { exportResultsToCSV } from "@/lib/export";
 
 interface ResultsPanelProps {
   results: TrainingResults;
@@ -11,6 +13,15 @@ export function ResultsPanel({ results, optimizedResults }: ResultsPanelProps) {
   const improvement = optimizedResults
     ? ((results.mse - optimizedResults.mse) / results.mse) * 100
     : 0;
+
+  const handleExport = () => {
+    exportResultsToCSV(
+      results.mse,
+      optimizedResults?.mse || null,
+      results.predictions,
+      optimizedResults?.predictions || null
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -40,10 +51,14 @@ export function ResultsPanel({ results, optimizedResults }: ResultsPanelProps) {
       </div>
 
       <div className="rounded-xl border border-border overflow-hidden">
-        <div className="px-4 py-3 bg-secondary/50 border-b border-border">
+        <div className="px-4 py-3 bg-secondary/50 border-b border-border flex items-center justify-between">
           <h4 className="font-semibold text-foreground">
             Sample Predictions vs Actual
           </h4>
+          <Button variant="outline" size="sm" onClick={handleExport}>
+            <Download className="w-4 h-4 mr-1" />
+            Export CSV
+          </Button>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
